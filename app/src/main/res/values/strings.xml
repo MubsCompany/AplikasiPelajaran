@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Aplikasi Pelajaran</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="username_salah">Username salah</string>
+    <string name="password_salah">Password salah</string>
+    <string name="password">Password</string>
+    <string name="kembali">kembali</string>
+
+    <string name="nama_pelajaran1">Mobile Programming(MobPro)</string>
+    <string name="nama_pelajaran2">Pancasila</string>
+    <string name="nama_pelajaran3">Multimedia Terapan(Multer)</string>
+    <string name="nama_pelajaran4">Pengembangan Profesi(PengProf)</string>
+    <string name="nama_pelajaran5">Proyek Tingkat(PT)</string>
+    <string name="nama_pelajaran6">Pengantar Pengembangan Aplikasi Permainan(PPAP)</string>
+
+    <string name="nama_dosen1">Rizza Mandasari</string>
+    <string name="nama_dosen2">Agung Tesa Gumilar</string>
+    <string name="nama_dosen3">Fathah Noor Prawita</string>
+    <string name="nama_dosen4">Rahayu S. Purnami</string>
+    <string name="nama_dosen5">Mia Rosmiati</string>
+    <string name="nama_dosen6">Amir Hasanudin Fauzi</string>
+
+    <string name="kelas">46–01</string>
+    <string name="profile">Profile</string>
+    <string name="login_berhasil">Login berhasil</string>
+    <string name="kalimat_checkbox">Checkbox is %1$s</string>
+
+
+</resources>
