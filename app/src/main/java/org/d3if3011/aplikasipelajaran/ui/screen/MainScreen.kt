@@ -4,6 +4,7 @@ import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -20,8 +21,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -39,7 +38,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import org.d3if3011.aplikasipelajaran.MainActivity
 import org.d3if3011.aplikasipelajaran.R
 import org.d3if3011.aplikasipelajaran.navigation.Screen
 import org.d3if3011.aplikasipelajaran.ui.theme.AplikasiPelajaranTheme
@@ -122,18 +120,23 @@ fun ScreenContent(navController: NavController, modifier: Modifier = Modifier) {
             ),
             modifier = Modifier.fillMaxWidth()
             )
-        Checkbox(
-            checked = isChecked.value,
-            onCheckedChange = { 
-                isChecked.value = it
-            }
-        )
+
+        Row (
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Checkbox(
+                checked = isChecked.value,
+                onCheckedChange = {
+                    isChecked.value = it
+                }
+            )
             Text(
                 text = stringResource(
-                R.string.kalimat_checkbox,
-                if (isChecked.value) "checked" else "unchecked"
+                    R.string.kalimat_checkbox,
+                    if (isChecked.value) stringResource(R.string.checked) else stringResource(R.string.unchecked)
                 )
             )
+        }
 
         Button(
             onClick = {
@@ -141,7 +144,7 @@ fun ScreenContent(navController: NavController, modifier: Modifier = Modifier) {
                 passwordFalse = (password == "")
                 if (usernameFalse||passwordFalse) return@Button
 
-                navController.navigate(Screen.Dashboard.route)
+                navController.navigate(Screen.Dashboard.route + "/$username")
                 Toast.makeText(context, R.string.login_berhasil, Toast.LENGTH_SHORT).show()
             },
             modifier = Modifier.padding(8.dp),
@@ -149,7 +152,6 @@ fun ScreenContent(navController: NavController, modifier: Modifier = Modifier) {
         ) {
             Text(text = stringResource(id = R.string.login))
         }
-        Text(text = username)
     }
 }
 
@@ -165,14 +167,14 @@ fun IconPicker(isError: Boolean, unit: String) {
 @Composable
 fun ErrorHintUsername(isError: Boolean) {
     if (isError) {
-        Text(text = stringResource(id = R.string.username_salah))
+        Text(text = stringResource(id = R.string.username_wrong))
     }
 }
 
 @Composable
 fun ErrorHintPassword(isError: Boolean) {
     if (isError) {
-        Text(text = stringResource(id = R.string.password_salah))
+        Text(text = stringResource(id = R.string.password_wrong))
     }
 }
 

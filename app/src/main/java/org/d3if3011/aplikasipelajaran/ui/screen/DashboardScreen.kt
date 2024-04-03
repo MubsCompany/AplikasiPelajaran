@@ -55,11 +55,11 @@ import org.d3if3011.aplikasipelajaran.navigation.Screen
 import org.d3if3011.aplikasipelajaran.ui.theme.AplikasiPelajaranTheme
 
 @Composable
-fun DashboardScreen(navHostController: NavHostController) {
+fun DashboardScreen(username: String?, navHostController: NavHostController) {
     Scaffold (
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            TopAppBar(navHostController)
+            TopAppBar(username, navHostController)
         }
     ) {paddingValues ->
         PelajaranList(listPelajaran = PelajaranRepository.pelajaran, modifier = Modifier.padding(paddingValues))
@@ -68,18 +68,18 @@ fun DashboardScreen(navHostController: NavHostController) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBar(navHostController: NavHostController ,modifier: Modifier = Modifier) {
+fun TopAppBar(username: String?, navHostController: NavHostController ,modifier: Modifier = Modifier) {
     CenterAlignedTopAppBar(
         title = {
             Text(
-                text = stringResource(id = R.string.app_name),
+                text = "Halo, $username",
                 style = MaterialTheme.typography.headlineSmall
             )
         },
         actions = {
             IconButton(
                 onClick = {
-                    navHostController.navigate(Screen.Profile.route)
+                    navHostController.navigate(Screen.Profile.route + "/$username")
                 }
             ) {
                 Icon(

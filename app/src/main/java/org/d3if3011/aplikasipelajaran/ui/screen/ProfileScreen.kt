@@ -1,5 +1,7 @@
 package org.d3if3011.aplikasipelajaran.ui.screen
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
@@ -10,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -31,7 +34,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,7 +50,7 @@ import org.d3if3011.aplikasipelajaran.ui.theme.AplikasiPelajaranTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileScreen(navController: NavHostController) {
+fun ProfileScreen(username: String?, navController: NavHostController) {
     Scaffold (
         topBar = {
             TopAppBar(
@@ -63,7 +66,7 @@ fun ProfileScreen(navController: NavHostController) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = stringResource(
-                            id = R.string.kembali
+                            id = R.string.back
                             )
                         )
                     }
@@ -71,21 +74,58 @@ fun ProfileScreen(navController: NavHostController) {
             )
         }
     ) {paddingValues ->
-        ProfileScreenContent(stringResource(id = R.string.username),modifier = Modifier.padding(paddingValues))
+        ProfileScreenContent(username,modifier = Modifier.padding(paddingValues))
     }
 }
 
 @Composable
-fun ProfileScreenContent(nama: String, modifier: Modifier = Modifier) {
-    PickImageFromGallery()
+fun ProfileScreenContent(username: String?, modifier: Modifier = Modifier) {
+    val context = LocalContext.current
+
+    Column (
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(text = "Halo, $username")
+//        PickImageFromGallery()
+        Button(
+            onClick = {
+                shareData(
+                    context = context,
+                    message = context.getString(
+                        R.string.text_untuk_dibagikan
+                    )
+                )
+            },
+            modifier = Modifier.padding(top = 8.dp),
+            contentPadding = PaddingValues(horizontal = 32.dp, vertical = 16.dp)
+        ) {
+            Text(text = stringResource(id = R.string.share))
+        }
+    }
+
 }
 
+private fun shareData(context: Context, message: String) {
+    val shareIntent = Intent(Intent.ACTION_SEND).apply {
+        type = "text/plain"
+        putExtra(Intent.EXTRA_TEXT, message)
+    }
+    if (shareIntent.resolveActivity(context.packageManager) != null) {
+        context.startActivity(shareIntent)
+    }
+}
+
+// tidak digunakan karena belum bisa menyimpan gambar saat perpindahan halaman
 @Composable
 fun PickImageFromGallery() {
-    var imageUri by remember {
+    var imageUri by rememberSaveable {
         mutableStateOf<Uri?>(null)
     }
-    val bitmap = remember {
+    val bitmap = rememberSaveable {
         mutableStateOf<Bitmap?>(null)
     }
     val context = LocalContext.current
@@ -98,10 +138,6 @@ fun PickImageFromGallery() {
     )
 
     Column (
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         imageUri?.let {
@@ -137,6 +173,6 @@ fun PickImageFromGallery() {
 @Composable
 fun ProfileScreenPreview() {
     AplikasiPelajaranTheme {
-        ProfileScreen(rememberNavController())
+        ProfileScreen("test", rememberNavController())
     }
 }

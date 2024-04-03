@@ -18,11 +18,13 @@ fun SetupNavGraph(navController: NavHostController = rememberNavController()) {
             composable(route = Screen.Home.route) {
                 MainScreen(navController)
             }
-            composable(route = Screen.Dashboard.route) {
-                DashboardScreen(navController)
+            composable(route = Screen.Dashboard.route + "/{id}") { navBackStack ->
+                val username = navBackStack.arguments?.getString("id")
+                DashboardScreen(username, navController)
             }
-            composable(route = Screen.Profile.route) {
-                ProfileScreen(navController)
+            composable(route = Screen.Profile.route + "/{id}") { navBackStack ->
+                val username = navBackStack.arguments?.getString("id")
+                ProfileScreen(username, navController)
             }
         }
     )

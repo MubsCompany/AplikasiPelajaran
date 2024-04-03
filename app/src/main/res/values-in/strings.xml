@@ -1,11 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Lesson Application</string>
+    <string name="app_name">Aplikasi Pelajaran</string>
     <string name="login">Login</string>
     <string name="username">Username</string>
-    <string name="username_wrong">Wrong Username</string>
-    <string name="password_wrong">Wrong Password</string>
+    <string name="username_wrong">Username salah</string>
+    <string name="password_wrong">Password salah</string>
     <string name="password">Password</string>
-    <string name="back">back</string>
+    <string name="back">kembali</string>
 
     <string name="nama_pelajaran1">Mobile Programming(MobPro)</string>
     <string name="nama_pelajaran2">Pancasila</string>
@@ -22,14 +23,13 @@
     <string name="nama_dosen6">Amir Hasanudin Fauzi</string>
 
     <string name="kelas">46–01</string>
-    <string name="profile">Profile</string>
-    <string name="login_berhasil">Login successful</string>
-    <string name="kalimat_checkbox">Checkbox is %1$s</string>
+    <string name="profile">Profil</string>
+    <string name="login_berhasil">Login berhasil</string>
+    <string name="kalimat_checkbox">Checkbox %1$s</string>
 
 
-    <string name="text_untuk_dibagikan">Hello, im using lesson application</string>
-    <string name="share">Share</string>
-    <string name="checked">checked</string>
-    <string name="unchecked">unchecked</string>
-
+    <string name="text_untuk_dibagikan">Halo, saya menggunakan aplikasi pelajaran</string>
+    <string name="share">bagikan</string>
+    <string name="checked">terceklis</string>
+    <string name="unchecked">tidak terceklis</string>
 </resources>
